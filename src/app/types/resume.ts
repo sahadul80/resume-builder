@@ -9,7 +9,7 @@ export interface PersonalInfo {
   linkedin?: string;
   github?: string;
   summary: string;
-  picture?: string; // Base64 or URL
+  picture?: string;
 }
 
 export interface Education {
@@ -83,3 +83,7 @@ export interface ResumeData {
 }
 
 export type TemplateStyle = 'modern' | 'professional' | 'creative';
+
+// Helper type for update functions
+export type ResumeDataSection = keyof ResumeData;
+export type ResumeDataValue<T extends ResumeDataSection> = ResumeData[T];

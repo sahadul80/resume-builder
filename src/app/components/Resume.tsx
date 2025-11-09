@@ -7,8 +7,7 @@ import TemplateModern from './TemplateModern';
 import TemplateProfessional from './TemplateProfessional';
 import TemplateCreative from './TemplateCreative';
 import ResumeForm from './ResumeForm';
-import { ResumeData, TemplateStyle } from '../types/resume';
-import { downloadPDF } from '../utils/pdfGenerator';
+import { ResumeData, TemplateStyle, ResumeDataSection, ResumeDataValue } from '../types/resume';
 
 const initialResumeData: ResumeData = {
   personal: {
@@ -42,7 +41,10 @@ export default function ResumeBuilder() {
     { id: 'creative', name: 'Creative', description: 'Innovative design for creative and tech roles' },
   ];
 
-  const updateResumeData = (section: keyof ResumeData, data: any) => {
+  const updateResumeData = <T extends ResumeDataSection>(
+    section: T, 
+    data: ResumeDataValue<T>
+  ) => {
     setResumeData(prev => ({
       ...prev,
       [section]: data
@@ -250,3 +252,14 @@ export default function ResumeBuilder() {
     </div>
   );
 }
+
+// Mock PDF generator function (replace with your actual implementation)
+const downloadPDF = async (element: HTMLElement, filename: string): Promise<void> => {
+  // Your PDF generation logic here
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('PDF generated for:', filename);
+      resolve();
+    }, 2000);
+  });
+};
